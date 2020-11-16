@@ -27,6 +27,6 @@ def extract(url: str):
                 return subdomain+'.'+domain+'.'+suffix
             return domain+'.'+suffix
         else:
-            raise Exception('Invalid url format: %s. Check url suffix.'%(url))
+            raise Exception('Invalid url format: %s Check url suffix.'%(url))
     else:
         raise Exception('URL must me string.')
