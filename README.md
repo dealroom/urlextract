@@ -2,7 +2,7 @@
 Wrapper class for extracting only wanted parts from urls.
 
 ## Install
-`pip install -e git+https://github.com/dealroom/urlextract.git`
+`pip install -e git+https://github.com/dealroom/urlextract.git#egg=urlextract`
 
 ## Usage
 ```python
