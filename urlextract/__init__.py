@@ -14,11 +14,18 @@ def extract(url: str):
         str: cleaned url with only wanted parts.
     """
     if isinstance(url, str):
-        tld = tldextract.extract(url)
+        subdomain, domain, suffix = tldextract.extract(url)
         # Exclude www subdomain, keep the rest
         # Check if format is valid
-        if tld.domain and tld.suffix:
-            return '.'.join(part for part in tld if part and part!='www')
+        if domain and suffix:
+            if subdomain:
+                if subdomain=='www':
+                    subdomain = ''
+                if 'www.' in subdomain:
+                    subdomain = subdomain.replace('www.','')
+            if subdomain:
+                return subdomain+'.'+domain+'.'+suffix
+            return domain+'.'+suffix
         else:
             raise Exception('Invalid url format: %s. Check url suffix.'%(url))
     else:
