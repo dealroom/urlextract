@@ -14,7 +14,7 @@ def extract(url: str):
         str: cleaned url with only wanted parts.
     """
     if isinstance(url, str):
-        subdomain, domain, suffix = tldextract.extract(url)
+        subdomain, domain, suffix = tldextract.extract(url.lower())
         # Exclude www subdomain, keep the rest
         # Check if format is valid
         if domain and suffix:
