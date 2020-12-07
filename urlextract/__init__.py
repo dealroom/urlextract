@@ -23,9 +23,10 @@ def extract(url: str):
                     subdomain = ''
                 if 'www.' in subdomain:
                     subdomain = subdomain.replace('www.','')
+            website = domain+'.'+suffix
             if subdomain:
-                return subdomain+'.'+domain+'.'+suffix
-            return domain+'.'+suffix
+                website = subdomain+'.'+website
+            return website.lower().strip()
         else:
             raise Exception('Invalid url format: %s Check url suffix.'%(url))
     else:
