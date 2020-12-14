@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="dealroom-urlextract",  # Replace with your own username
+    name="dealroom-urlextract",
     version="0.0.1",
     author="Dealroom.co",
     author_email="data@dealroom.co",
