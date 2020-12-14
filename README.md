@@ -2,11 +2,11 @@
 Wrapper class for extracting only wanted parts from urls.
 
 ## Install
-`pip install -e git+https://github.com/dealroom/urlextract.git#egg=urlextract`
+`pip install -e git+https://github.com/dealroom/data-urlextract.git#egg=dealroom-urlextract`
 
 ## Usage
 ```python
->>> from urlextract import extract
+>>> from dealroom_urlextract import extract
 
 >>> extract('http://www.something.com/home.html?abc')
 something.com

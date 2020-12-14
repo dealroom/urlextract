@@ -1,4 +1,4 @@
-from urlextract import extract
+from dealroom_urlextract import extract
 
 
 # Valid
