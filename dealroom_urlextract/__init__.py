@@ -34,8 +34,8 @@ def extract(url: str):
     else:
         raise Exception('URL must me string.')
 
-def extract_with_subpath(url: str):
-    """Extract the correct formatting for a passed url including the sub path
+def extract_with_path(url: str):
+    """Extract the correct formatting for a passed url including the path
     and change all '/' into '@'.
 
     >>> extract_with_subpath('http://www.something.com/home/asd.html?abc')
@@ -51,10 +51,10 @@ def extract_with_subpath(url: str):
         str: cleaned url with only wanted parts.
     """
     base = extract(url)
-    sub_path = url.split(base)[-1]
-    if len(sub_path) > 0:
-        sub_path = sub_path.split('?')[0]
-        if sub_path[-1] == '/':
-            sub_path = sub_path[:-1]
-        sub_path = sub_path.replace('/','@')
-    return base + sub_path
+    path = url.split(base)[-1]
+    if len(path) > 0:
+        path = path.split('?')[0]
+        if path[-1] == '/':
+            path = path[:-1]
+        path = path.replace('/','@')
+    return base + path
