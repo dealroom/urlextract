@@ -32,7 +32,7 @@ def extract(url: str):
         else:
             raise Exception('Invalid url format: %s Check url suffix.'%(url))
     else:
-        raise Exception('URL must me string.')
+        raise Exception('URL must be string.')
 
 def extract_with_path(url: str):
     """Extract the correct formatting for a passed url including the path
