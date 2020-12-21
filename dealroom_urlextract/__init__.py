@@ -3,8 +3,10 @@ import tldextract
 def extract(url: str):
     """Extract the correct formatting for a passed url.
 
-    'http://www.something.com/home.html?abc'->'something.com'
-    'https://app.example.co.uk/something.html'->'app.example.co.uk'
+    >>> extract('http://www.something.com/home.html?abc')
+    'something.com'
+    >>> extract('https://app.example.co.uk/something.html')
+    'app.example.co.uk'
 
     Args:
         url (str): Any url-like string
@@ -30,4 +32,29 @@ def extract(url: str):
         else:
             raise Exception('Invalid url format: %s Check url suffix.'%(url))
     else:
-        raise Exception('URL must me string.')
+        raise Exception('URL must be string.')
+
+def extract_with_path(url: str):
+    """Extract the correct formatting for a passed url including the path
+    and change all '/' into '@'.
+
+    >>> extract_with_subpath('http://www.something.com/home/asd.html?abc')
+    'something.com@home@asd.html'
+    >>> extract_with_subpath('https://app.example.co.uk/en/about/something.html')
+    'app.example.co.uk@en@about@something.html'
+
+    Args:
+        url (str): Any url-like string
+    Raises:
+        Exception: if suffix is not valid (i.e. .com, .co, etc.)
+    Returns:
+        str: cleaned url with only wanted parts.
+    """
+    base = extract(url)
+    path = url.split(base)[-1]
+    if len(path) > 0:
+        path = path.split('?')[0]
+        if path[-1] == '/':
+            path = path[:-1]
+        path = path.replace('/','@')
+    return base + path
