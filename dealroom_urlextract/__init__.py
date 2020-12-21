@@ -51,9 +51,7 @@ def extract_with_subpath(url: str):
         str: cleaned url with only wanted parts.
     """
     base = extract(url)
-    print(base)
     sub_path = url.split(base)[-1]
-    print(sub_path)
     if len(sub_path) > 0:
         sub_path = sub_path.split('?')[0]
         if sub_path[-1] == '/':
