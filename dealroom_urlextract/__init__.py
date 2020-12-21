@@ -38,9 +38,9 @@ def extract_with_path(url: str):
     """Extract the correct formatting for a passed url including the path
     and change all '/' into '@'.
 
-    >>> extract_with_subpath('http://www.something.com/home/asd.html?abc')
+    >>> extract_with_path('http://www.something.com/home/asd.html?abc')
     'something.com@home@asd.html'
-    >>> extract_with_subpath('https://app.example.co.uk/en/about/something.html')
+    >>> extract_with_path('https://app.example.co.uk/en/about/something.html')
     'app.example.co.uk@en@about@something.html'
 
     Args:
@@ -50,6 +50,7 @@ def extract_with_path(url: str):
     Returns:
         str: cleaned url with only wanted parts.
     """
+    url = url.lower().strip()
     base = extract(url)
     path = url.split(base)[-1]
     if len(path) > 0:
