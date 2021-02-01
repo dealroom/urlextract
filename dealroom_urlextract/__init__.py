@@ -35,13 +35,12 @@ def extract(url: str):
         raise Exception('URL must be string.')
 
 def extract_with_path(url: str):
-    """Extract the correct formatting for a passed url including the path
-    and change all '/' into '@'.
+    """Extract the correct formatting for a passed url including the full path.
 
     >>> extract_with_path('http://www.something.com/home/asd.html?abc')
-    'something.com@home@asd.html'
+    'something.com/home/asd.html'
     >>> extract_with_path('https://app.example.co.uk/en/about/something.html')
-    'app.example.co.uk@en@about@something.html'
+    'app.example.co.uk/en/about/something.html'
 
     Args:
         url (str): Any url-like string
@@ -57,5 +56,4 @@ def extract_with_path(url: str):
         path = path.split('?')[0]
         if path[-1] == '/':
             path = path[:-1]
-        path = path.replace('/','@')
     return base + path
