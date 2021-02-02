@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "data-urlextract"
+name = "dealroom-urlextract"
 version = "0.1.0"
 description = ""
 authors = ["GuillermoDR <70137647+GuillermoDR@users.noreply.github.com>"]
