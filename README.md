@@ -3,10 +3,10 @@ Wrapper class for extracting only wanted parts from urls.
 
 ## Install
 
-**pip:**  
-`pip install -e git+https://github.com/dealroom/data-urlextract.git#egg=dealroom-urlextract`
+**pip:**
+`pip install git+https://github.com/dealroom/data-urlextract@main`
 
-**Poetry:**  
+**Poetry:**
 `poetry add "git+https://github.com/dealroom/data-urlextract#main"`
 
 ## Usage
