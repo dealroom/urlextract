@@ -1,5 +1,8 @@
 import tldextract
 
+class InvalidURLFormat(Exception):
+    pass
+
 def extract(url: str):
     """Extract the correct formatting for a passed url.
 
@@ -11,7 +14,7 @@ def extract(url: str):
     Args:
         url (str): Any url-like string
     Raises:
-        Exception: if suffix is not valid (i.e. .com, .co, etc.)
+        Exception: if suffix is not valid (i.e. .com, .co, etc.) or the domain starts or ends with a hyphen "-"
     Returns:
         str: cleaned url with only wanted parts.
     """
@@ -19,6 +22,8 @@ def extract(url: str):
         subdomain, domain, suffix = tldextract.extract(url.lower())
         # Exclude www subdomain, keep the rest
         # Check if format is valid
+        if domain[0] == "-" or domain[-1] == "-":
+            raise InvalidURLFormat(f"{url} Domain names can't have a hyphen as the first or last character")
         if domain and suffix:
             if subdomain:
                 if subdomain=='www':
@@ -30,9 +35,9 @@ def extract(url: str):
                 website = subdomain+'.'+website
             return website.lower().strip()
         else:
-            raise Exception('Invalid url format: %s Check url suffix.'%(url))
+            raise InvalidURLFormat(f"{url} Check url suffix.")
     else:
-        raise Exception('URL must be string.')
+        raise InvalidURLFormat("URL must be string.")
 
 def extract_with_path(url: str):
     """Extract the correct formatting for a passed url including the full path.
