@@ -3,7 +3,7 @@ import tldextract
 class InvalidURLFormat(Exception):
     pass
 
-INVALID_CHARACTERS = [" ", "\\", "<", ">", "{", "}", ";"]
+INVALID_CHARACTERS = [" ", "\\", "<", ">", "{", "}", ";", ","]
 
 def extract(url: str):
     """Extract the correct formatting for a passed url.
