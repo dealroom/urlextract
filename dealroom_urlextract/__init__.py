@@ -3,6 +3,8 @@ import tldextract
 class InvalidURLFormat(Exception):
     pass
 
+INVALID_CHARACTERS = [" ", "\\", "<", ">", "{", "}", ";"]
+
 def extract(url: str):
     """Extract the correct formatting for a passed url.
 
@@ -19,7 +21,13 @@ def extract(url: str):
         str: cleaned url with only wanted parts.
     """
     if isinstance(url, str):
-        subdomain, domain, suffix = tldextract.extract(url.lower())
+        url = url.lower().strip()
+
+        contains_invalid_char = any(invalid_char in url for invalid_char in INVALID_CHARACTERS)
+        if contains_invalid_char:
+            return InvalidURLFormat(f"{url} Website urls can't have invalid characters such as: space, \, <, >, ;, "+'{, }')
+
+        subdomain, domain, suffix = tldextract.extract(url)
         # Exclude www subdomain, keep the rest
         # Check if format is valid
         if domain[0] == "-" or domain[-1] == "-":
