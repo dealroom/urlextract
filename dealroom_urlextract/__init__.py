@@ -25,7 +25,7 @@ def extract(url: str):
 
         contains_invalid_char = any(invalid_char in url for invalid_char in INVALID_CHARACTERS)
         if contains_invalid_char:
-            return InvalidURLFormat(f"{url} Website urls can't have invalid characters such as: space, \, <, >, ;, "+'{, }')
+            raise InvalidURLFormat(f"{url} Website urls can't have invalid characters such as: space, \, <, >, ;, "+'{, }')
 
         subdomain, domain, suffix = tldextract.extract(url)
         # Exclude www subdomain, keep the rest
