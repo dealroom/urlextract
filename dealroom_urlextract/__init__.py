@@ -20,32 +20,38 @@ def extract(url: str):
     Returns:
         str: cleaned url with only wanted parts.
     """
-    if isinstance(url, str):
-        url = url.lower().strip()
 
-        contains_invalid_char = any(invalid_char in url for invalid_char in INVALID_CHARACTERS)
-        if contains_invalid_char:
-            raise InvalidURLFormat(f"{url} Website urls can't have invalid characters such as: space, \, <, >, ;, "+'{, }')
-
-        subdomain, domain, suffix = tldextract.extract(url)
-        # Exclude www subdomain, keep the rest
-        # Check if format is valid
-        if domain[0] == "-" or domain[-1] == "-":
-            raise InvalidURLFormat(f"{url} Domain names can't have a hyphen as the first or last character")
-        if domain and suffix:
-            if subdomain:
-                if subdomain=='www':
-                    subdomain = ''
-                if 'www.' in subdomain:
-                    subdomain = subdomain.replace('www.','')
-            website = domain+'.'+suffix
-            if subdomain:
-                website = subdomain+'.'+website
-            return website.lower().strip()
-        else:
-            raise InvalidURLFormat(f"{url} Check url suffix.")
-    else:
+    if not isinstance(url, str):
         raise InvalidURLFormat("URL must be string.")
+
+    url = url.lower().strip()
+
+    contains_invalid_char = any(invalid_char in url for invalid_char in INVALID_CHARACTERS)
+    if contains_invalid_char:
+        raise InvalidURLFormat(f"{url} Website urls can't have invalid characters such as: space, \, <, >, ;, "+'{, }')
+
+    # domain and suffix are required
+    subdomain, domain, suffix = tldextract.extract(url)
+    if not domain and not suffix:
+        raise InvalidURLFormat(f"{url} Check url suffix.")
+
+    # Check if format is valid
+    if domain[0] == "-" or domain[-1] == "-":
+        raise InvalidURLFormat(f"{url} Domain names can't have a hyphen as the first or last character")
+
+    # Exclude www subdomain, keep the rest
+    if subdomain:
+        if subdomain == "www":
+            subdomain = ""
+        if "www." in subdomain:
+            subdomain = subdomain.replace("www.", "")
+
+    website = domain + "." + suffix
+    if subdomain:
+        website = subdomain + "." + website
+
+    return website.lower().strip()
+
 
 def extract_with_path(url: str):
     """Extract the correct formatting for a passed url including the full path.
