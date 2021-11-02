@@ -14,9 +14,11 @@ def extract(url: str):
     'app.example.co.uk'
 
     Args:
-        url (str): Any url-like string
+        url (str): Any url-like string.
+
     Raises:
-        Exception: if suffix is not valid (i.e. .com, .co, etc.) or the domain starts or ends with a hyphen "-"
+        InvalidURLFormat: if suffix is not valid (i.e. .com, .co, etc.) or the domain starts or ends with a hyphen "-".
+
     Returns:
         str: cleaned url with only wanted parts.
     """
@@ -62,15 +64,17 @@ def extract_with_path(url: str):
     'app.example.co.uk/en/about/something.html'
 
     Args:
-        url (str): Any url-like string
+        url (str): Any url-like string.
+
     Raises:
-        Exception: if suffix is not valid (i.e. .com, .co, etc.)
+        InvalidURLFormat: if suffix is not valid (i.e. .com, .co, etc.) or the domain starts or ends with a hyphen "-".
+
     Returns:
         str: cleaned url with only wanted parts.
     """
     url = url.lower().strip()
     base = extract(url)
-    path = url.split(base)[-1]
+    path = url.split(base, 1)[-1]
     if len(path) > 0:
         path = path.split('?')[0]
         if path[-1] == '/':
