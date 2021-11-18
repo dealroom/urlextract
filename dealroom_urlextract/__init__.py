@@ -34,11 +34,11 @@ def extract(url: str):
 
     # domain and suffix are required
     subdomain, domain, suffix = tldextract.extract(url)
-    if not domain and not suffix:
-        raise InvalidURLFormat(f"{url} Check url suffix.")
+    if not domain or not suffix:
+        raise InvalidURLFormat(f"{url} Domain or suffix are missing or could not be extracted.")
 
     # Check if format is valid
-    if domain[0] == "-" or domain[-1] == "-":
+    if domain.startswith("-") or domain.endswith("-"):
         raise InvalidURLFormat(f"{url} Domain names can't have a hyphen as the first or last character")
 
     # Exclude www subdomain, keep the rest
