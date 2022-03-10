@@ -5,7 +5,7 @@ class InvalidURLFormat(Exception):
 
 INVALID_CHARACTERS = [" ", "\\", "<", ">", "{", "}", ";", ","]
 
-def extract(url: str):
+def extract(url: str, keep_subdomain:bool = True):
     """Extract the correct formatting for a passed url.
 
     >>> extract('http://www.something.com/home.html?abc')
@@ -49,7 +49,7 @@ def extract(url: str):
             subdomain = subdomain.replace("www.", "")
 
     website = domain + "." + suffix
-    if subdomain:
+    if keep_subdomain and subdomain:
         website = subdomain + "." + website
 
     return website.lower().strip()
