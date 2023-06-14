@@ -12,17 +12,17 @@ website_urls = [
 
 
 @pytest.fixture(params=website_urls, ids=str)
-def unformatted_name_surname(request) -> Any:
+def extract_from_raw_url(request) -> Any:
     return request.param
 
 
-def test_format(unformatted_name_surname) -> None:
+def test_extract(extract_from_raw_url) -> None:
     (
-        original_url,
+        raw_url,
         expectation,
-    ) = unformatted_name_surname
+    ) = extract_from_raw_url
     with expectation:
-        assert extract(url=original_url, keep_subdomain=True) is not None
+        assert extract(url=raw_url, keep_subdomain=True) is not None
 
 
 test_data_raw_website_urls = [
