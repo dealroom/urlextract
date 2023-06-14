@@ -6,6 +6,7 @@ from dealroom_urlextract import InvalidURLFormat, extract
 
 website_urls = [
     ("http://www.something.com/home.html?abc", does_not_raise()),
+    ("https://app.example.co.uk/something.html", does_not_raise()),
     ("https://app.example.invalid/something.html", pytest.raises(InvalidURLFormat)),
 ]
 
