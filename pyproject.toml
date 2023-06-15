@@ -5,7 +5,7 @@ description = ""
 authors = ["GuillermoDR <70137647+GuillermoDR@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.7"
 tldextract = "^3.4.0"
 
 [tool.poetry.group.dev.dependencies]

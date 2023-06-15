@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="dealroom-urlextract",
-    version="0.0.2",
+    version="0.0.3",
     author="Dealroom.co",
     author_email="data@dealroom.co",
     description="Wrapper class for extracting only wanted parts from urls.",
@@ -19,5 +19,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=["tldextract"],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
 )
