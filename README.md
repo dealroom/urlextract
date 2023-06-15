@@ -1,5 +1,6 @@
 # urlextract
-Wrapper class for extracting only wanted parts from urls.
+
+Wrapper for extracting only wanted parts from urls.
 
 ## Install
 
@@ -10,6 +11,7 @@ Wrapper class for extracting only wanted parts from urls.
 `poetry add "git+https://github.com/dealroom/data-urlextract#main"`
 
 ## Usage
+
 ```python
 >>> from dealroom_urlextract import extract
 
