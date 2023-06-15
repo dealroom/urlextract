@@ -1,0 +1,37 @@
+version: 2.1
+orbs:
+  python: circleci/python@2.1.1
+
+jobs:
+  test:
+    parameters:
+      tests_dir:
+        type: string
+      source_dir:
+        type: string
+        default: .
+    executor: python/default
+    docker:
+      - image: cimg/python:3.11
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            cd << parameters.source_dir >>
+            pip3 install -r requirements-dev.txt
+      - run:
+          name: Run tests
+          command: |
+            mkdir test-results
+            pytest --junitxml=<< parameters.source_dir >>/test-results/junit.xml << parameters.source_dir >>/<< parameters.tests_dir >>
+
+      - store_test_results:
+          path: << parameters.source_dir >>/test-results
+
+workflows:
+  test-service:
+    jobs:
+      - test:
+          context: data-prod-services
+          tests_dir: "tests"
