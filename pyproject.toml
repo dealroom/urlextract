@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "dealroom-urlextract"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["GuillermoDR <70137647+GuillermoDR@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-tldextract = "^3.4.0"
+tldextract = "3.5.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.3.2"
