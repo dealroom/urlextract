@@ -24,12 +24,12 @@ jobs:
           name: Run tests
           command: |
             mkdir test-results
-            pytest --junitxml=<< parameters.source_dir >>/test-results/junit.xml << parameters.source_dir >>/<< parameters.tests_dir >>
+            python3 -m pytest --junitxml=<< parameters.source_dir >>/test-results/junit.xml << parameters.source_dir >>/<< parameters.tests_dir >>
       - store_test_results:
           path: << parameters.source_dir >>/test-results
 
 workflows:
-  test-service:
+  test:
     jobs:
       - test:
           tests_dir: "tests"
