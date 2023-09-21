@@ -29,7 +29,7 @@ jobs:
           path: << parameters.source_dir >>/test-results
 
 workflows:
-  run-tests:
+  test:
     jobs:
       - setup-and-test:
           tests_dir: "tests"
