@@ -1,37 +1,11 @@
 version: 2.1
 orbs:
-  python: circleci/python@2.1.1
-
-jobs:
-  test:
-    parameters:
-      tests_dir:
-        type: string
-      source_dir:
-        type: string
-        default: .
-    executor: python/default
-    docker:
-      - image: cimg/python:3.11
-    steps:
-      - checkout
-      - run:
-          name: Install Dependencies
-          command: |
-            cd << parameters.source_dir >>
-            pip3 install -r requirements-dev.txt
-      - run:
-          name: Run tests
-          command: |
-            mkdir test-results
-            pytest --junitxml=<< parameters.source_dir >>/test-results/junit.xml << parameters.source_dir >>/<< parameters.tests_dir >>
-
-      - store_test_results:
-          path: << parameters.source_dir >>/test-results
+  dr-data-sonarcloud: dealroom/data-sonarcloud@0.0.2
 
 workflows:
-  test-service:
+  run-tests-and-scan:
     jobs:
-      - test:
-          context: data-prod-services
-          tests_dir: "tests"
+      - dr-data-sonarcloud/test-and-scan-single-project-repo:
+          context: data-sonarcloud
+          xml_coverage_report: coverage.xml
+          debug: true
