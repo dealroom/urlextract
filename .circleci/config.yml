@@ -3,7 +3,7 @@ orbs:
   python: circleci/python@2.1.1
 
 jobs:
-  test:
+  setup-and-test:
     parameters:
       tests_dir:
         type: string
@@ -12,7 +12,7 @@ jobs:
         default: .
     executor: python/default
     docker:
-      - image: cimg/python:3.11
+      - image: cimg/python:3.7
     steps:
       - checkout
       - run:
@@ -29,7 +29,7 @@ jobs:
           path: << parameters.source_dir >>/test-results
 
 workflows:
-  test:
+  run-tests:
     jobs:
-      - test:
+      - setup-and-test:
           tests_dir: "tests"
