@@ -13,7 +13,6 @@ def extract(url: str, keep_subdomain: bool = True) -> str:
 
     >>> extract('http://www.something.com/home.html?abc')
     'something.com'
-
     >>> extract('https://app.example.co.uk/something.html')
     'app.example.co.uk'
 
@@ -26,6 +25,9 @@ def extract(url: str, keep_subdomain: bool = True) -> str:
     Returns:
         str: cleaned url with only wanted parts.
     """
+
+    if not isinstance(url, str):
+        raise InvalidURLFormat("URL must be string.")
 
     url = url.lower().strip()
 
@@ -70,7 +72,6 @@ def extract_with_path(url: str) -> str:
 
     >>> extract_with_path('http://www.something.com/home/asd.html?abc')
     'something.com/home/asd.html'
-
     >>> extract_with_path('https://app.example.co.uk/en/about/something.html')
     'app.example.co.uk/en/about/something.html'
 
